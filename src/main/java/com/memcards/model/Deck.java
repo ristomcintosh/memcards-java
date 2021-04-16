@@ -12,7 +12,7 @@ public class Deck {
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "deck")
+    @OneToMany(mappedBy = "deck", orphanRemoval = true, cascade = CascadeType.REMOVE)
     private List<Flashcard> flashcards;
 
     public Deck() {}

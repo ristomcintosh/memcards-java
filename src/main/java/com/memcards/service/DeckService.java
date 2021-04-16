@@ -2,22 +2,21 @@ package com.memcards.service;
 
 import com.memcards.model.Deck;
 import com.memcards.repository.DeckRepository;
+import com.memcards.repository.FlashcardRepository;
 import com.memcards.service.exception.DeckNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-
-import static java.util.Collections.singletonList;
 
 @Service
 public class DeckService {
 
     private final DeckRepository deckRepository;
+    private final FlashcardRepository flashcardRepository;
 
-    public DeckService(DeckRepository deckRepository) {
+    public DeckService(DeckRepository deckRepository, FlashcardRepository flashcardRepository) {
         this.deckRepository = deckRepository;
+        this.flashcardRepository = flashcardRepository;
     }
 
     public List<Deck> getAllDecks() {
@@ -36,6 +35,7 @@ public class DeckService {
 
     public void deleteDeck(Long deckId) throws DeckNotFoundException {
         Deck deckInDb = deckRepository.findById(deckId).orElseThrow(DeckNotFoundException::new);
+        flashcardRepository.deleteAllByDeckId(deckInDb.getId());
         deckRepository.delete(deckInDb);
     }
 

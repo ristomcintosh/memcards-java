@@ -1,5 +1,7 @@
 package com.memcards.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.UUID;
 
@@ -9,7 +11,7 @@ public class Flashcard {
     @Id
     @GeneratedValue
     private UUID id;
-//    private Long deckId;
+    //    private Long deckId;
     private String front;
     private String back;
     private String image_src;
@@ -17,9 +19,8 @@ public class Flashcard {
     private String image_thumb;
 
     @ManyToOne
-    @JoinColumn(name="deck_id")
+    @JoinColumn(name = "deck_id")
     private Deck deck;
-
 
 
     public Flashcard(String front, String back, String image_src, String image_alt, String image_thumb) {
@@ -42,13 +43,6 @@ public class Flashcard {
         this.id = id;
     }
 
-//    public Deck getDeck() {
-//        return deck;
-//    }
-
-    public void setDeck(Deck deck) {
-        this.deck = deck;
-    }
 
     public String getFront() {
         return front;
@@ -88,5 +82,13 @@ public class Flashcard {
 
     public void setImage_thumb(String image_thumb) {
         this.image_thumb = image_thumb;
+    }
+
+    public Deck getDeck() {
+        return deck;
+    }
+
+    public void setDeck(Deck deck) {
+        this.deck = deck;
     }
 }

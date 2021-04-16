@@ -2,7 +2,8 @@ package com.memcards.controller.dto;
 
 import java.util.UUID;
 
-public class CreateFlashcardRequestBuilder {
+public class UpdateFlashcardRequestBuilder {
+    private String id = UUID.randomUUID().toString();
     private String front = "Test Front";
     private String back = "Test Back";
     private String image_src = "image src";
@@ -10,18 +11,18 @@ public class CreateFlashcardRequestBuilder {
     private String image_thumb = "image thumb";
 
 
-    public CreateFlashcardRequestBuilder withFront(String front) {
+    public UpdateFlashcardRequestBuilder withFront(String front) {
         this.front = front;
         return this;
     }
 
-    public CreateFlashcardRequestBuilder withBack(String back) {
+    public UpdateFlashcardRequestBuilder withBack(String back) {
         this.back = back;
         return this;
     }
 
-    public CreatedFlashcardRequest build() {
+    public UpdatedFlashcardRequest build() {
         var image = new ImageDto(image_src, image_alt, image_thumb);
-        return new CreatedFlashcardRequest(front, back, image);
+        return new UpdatedFlashcardRequest(id, front, back, image);
     }
 }
